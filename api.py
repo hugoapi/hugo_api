@@ -5,12 +5,12 @@ import os
 
 # Fonction pour lire le fichier CSV
 def read_csv():
-        return pd.read_csv("data.csv")
+        return pd.read_csv("https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv")
 
 
 # Fonction pour écrire dans le fichier CSV
 def write_csv(dataframe):
-    dataframe.to_csv("data.csv", index=False)
+    dataframe.to_csv("https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv", index=False)
 
 
 # Champs du formulaire
