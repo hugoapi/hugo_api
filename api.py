@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import base64
 import requests
+import os
+
+# Récupérer le token d'accès personnel depuis les variables d'environnement
+github_token = os.environ.get('GITHUB_TOKEN')
 
 # Lire le fichier CSV depuis GitHub
 def read_csv():
@@ -24,7 +28,7 @@ def get_file_sha():
     try:
         url = "https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
         headers = {
-            'Authorization': 'token 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'  
+            'Authorization': f'token {github_token}'  
         }
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -55,7 +59,7 @@ def update_github_file(filepath="database.csv", message="Update data.csv"):
             "sha": sha
         }
         headers = {
-            'Authorization': 'token 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' 
+            'Authorization': 'Authorization': f'token {github_token}' 
         }
         response = requests.put(url, json=payload, headers=headers)
         response.raise_for_status()
