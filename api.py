@@ -74,7 +74,6 @@ OPENING_TIME_DOOR = st.number_input("opening time door", min_value=0, max_value=
 
 # Bouton pour soumettre le formulaire
 if st.button("Soumettre"):
-    curl -H "Authorization: token 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" https://api.github.com/user
     if not VOLUME or not TOTAL_STUDENTS or not OCCUPIED_TIME or not OPENING_WINDOW_TIME:
         st.error("Veuillez remplir tous les champs.")
     else:
