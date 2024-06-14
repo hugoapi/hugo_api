@@ -66,3 +66,5 @@ if st.button("Soumettre"):
         })
         df = pd.concat([df, new_entry], ignore_index=True)
         write_csv(df)
+        update_github_file(message="Updating data.csv with new entry")
+        st.success("Les données ont été soumises et enregistrées avec succès.")
