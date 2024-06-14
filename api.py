@@ -59,7 +59,7 @@ def update_github_file(filepath="database.csv", message="Update data.csv"):
             "sha": sha
         }
         headers = {
-            'Authorization': 'Authorization': f'token {github_token}' 
+            'Authorization': f'token {github_token}' 
         }
         response = requests.put(url, json=payload, headers=headers)
         response.raise_for_status()
