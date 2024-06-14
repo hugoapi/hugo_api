@@ -17,7 +17,7 @@ def write_csv(dataframe, filepath="data.csv"):
 def get_file_sha():
     url ="https://github.com/hugoapi/hugo_api/blob/main/data.csv"
     headers = {
-        'Authorization': 'token YOUR_GITHUB_TOKEN'
+        'Authorization': 'token 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'
     }
     response = requests.get(url, headers=headers)
     return response.json()['sha']
@@ -33,14 +33,14 @@ def update_github_file(filepath="data.csv", message="Update data.csv"):
     payload = {
         "message": message,
         "committer": {
-            "name": "Your Name",
-            "email": "your-email@example.com"
+            "name": "Baugnies",
+            "email": "hugobaugnies2000@gmail.com"
         },
         "content": content,
         "sha": sha
     }
     headers = {
-        'Authorization': 'token YOUR_GITHUB_TOKEN'
+        'Authorization': 'token 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'
     }
     response = requests.put(url, json=payload, headers=headers)
     return response.json()
