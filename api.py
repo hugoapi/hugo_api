@@ -24,7 +24,7 @@ def get_file_sha():
     try:
         url = "https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
         headers = {
-            'Authorization': 'token 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'  
+            'Authorization': 'token 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'  
         }
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -55,7 +55,7 @@ def update_github_file(filepath="database.csv", message="Update data.csv"):
             "sha": sha
         }
         headers = {
-            'Authorization': 'token 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' 
+            'Authorization': 'token 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' 
         }
         response = requests.put(url, json=payload, headers=headers)
         response.raise_for_status()
