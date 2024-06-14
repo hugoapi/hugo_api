@@ -88,4 +88,5 @@ if st.button("Soumettre"):
             write_csv(df)
             update_github_file(message="Updating data.csv with new entry")
             st.success("Les données ont été soumises et enregistrées avec succès.")
+curl -H "Authorization: token YOUR_GITHUB_TOKEN" https://api.github.com/user
 
