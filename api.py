@@ -13,7 +13,7 @@ def read_csv():
         return pd.DataFrame()  # Retourne un DataFrame vide en cas d'erreur
 
 # Écrire localement dans le fichier CSV
-def write_csv(dataframe, filepath="data.csv"):
+def write_csv(dataframe, filepath="https://github.com/hugoapi/hugo_api/blob/c3952454c31369e15dbc438c9a307b4717514e4f/data.csv"):
     try:
         dataframe.to_csv(filepath, index=False)
     except Exception as e:
