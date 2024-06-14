@@ -2,16 +2,16 @@ import streamlit as st
 import pandas as pd
 import os
 
+url = https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv
 
 # Fonction pour lire le fichier CSV
 def read_csv():
-        return pd.read_csv("https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv")
+    return pd.read_csv(url)
 
 
 # Fonction pour écrire dans le fichier CSV
-def write_csv(dataframe):
-    dataframe.to_csv("https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv", index=False)
-
+def write_csv(dataframe, filepath="data.csv"):
+    dataframe.to_csv(filepath, index=False)
 
 # Champs du formulaire
 VOLUME = st.number_input("classroom volume", min_value=0, max_value=10000, step=1, value=int(0))
