@@ -5,7 +5,7 @@ import requests
 import os
 
 # Récupérer le token d'accès personnel depuis les variables d'environnement
-github_token = os.environ.get('GITHUB_TOKEN')
+github_token = os.getenv('GITHUB_TOKEN')
 if not github_token:
     st.error("Le token GitHub n'a pas été trouvé. Veuillez définir la variable d'environnement GITHUB_TOKEN.")
 
