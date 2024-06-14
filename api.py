@@ -35,6 +35,7 @@ def get_file_sha():
         return response.json()['sha']
     except Exception as e:
         st.error(f"Erreur lors de la récupération du SHA du fichier : {e}")
+        st.error(f"Response content: {response.content}")
         return None
 
 # Mettre à jour le fichier sur GitHub
