@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import os
 
-url = https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv
 
 # Fonction pour lire le fichier CSV
 def read_csv():
+    url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv"
     return pd.read_csv(url)
 
 
@@ -15,7 +15,7 @@ def write_csv(dataframe, filepath="data.csv"):
 
 # Obtenir le SHA du fichier actuel sur GitHub
 def get_file_sha():
-    url = "https://api.github.com/repos/hugoapi/hugo_api/contents/data.csv"
+    url ="https://github.com/hugoapi/hugo_api/blob/main/data.csv"
     headers = {
         'Authorization': 'token YOUR_GITHUB_TOKEN'
     }
@@ -29,7 +29,7 @@ def update_github_file(filepath="data.csv", message="Update data.csv"):
     
     sha = get_file_sha()
     
-    url = "https://api.github.com/repos/hugoapi/hugo_api/contents/data.csv"
+    url = "https://github.com/hugoapi/hugo_api/blob/main/data.csv"
     payload = {
         "message": message,
         "committer": {
