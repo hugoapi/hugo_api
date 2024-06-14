@@ -13,6 +13,38 @@ def read_csv():
 def write_csv(dataframe, filepath="data.csv"):
     dataframe.to_csv(filepath, index=False)
 
+# Obtenir le SHA du fichier actuel sur GitHub
+def get_file_sha():
+    url = "https://api.github.com/repos/hugoapi/hugo_api/contents/data.csv"
+    headers = {
+        'Authorization': 'token YOUR_GITHUB_TOKEN'
+    }
+    response = requests.get(url, headers=headers)
+    return response.json()['sha']
+
+# Mettre à jour le fichier sur GitHub
+def update_github_file(filepath="data.csv", message="Update data.csv"):
+    with open(filepath, "rb") as f:
+        content = base64.b64encode(f.read()).decode()
+    
+    sha = get_file_sha()
+    
+    url = "https://api.github.com/repos/hugoapi/hugo_api/contents/data.csv"
+    payload = {
+        "message": message,
+        "committer": {
+            "name": "Your Name",
+            "email": "your-email@example.com"
+        },
+        "content": content,
+        "sha": sha
+    }
+    headers = {
+        'Authorization': 'token YOUR_GITHUB_TOKEN'
+    }
+    response = requests.put(url, json=payload, headers=headers)
+    return response.json()
+
 # Champs du formulaire
 VOLUME = st.number_input("classroom volume", min_value=0, max_value=10000, step=1, value=int(0))
 TOTAL_STUDENTS = st.number_input("Number of students", min_value=0, max_value=10000, step=1, value=int(0))
