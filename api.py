@@ -48,8 +48,8 @@ def update_github_file(filepath="data.csv", message="Update data.csv"):
         payload = {
             "message": message,
             "committer": {
-                "name": "hugo",  # Remplacez par votre vrai nom
-                "email": "hugobaugnies2000@gmail.com"  # Remplacez par votre email associé à GitHub
+                "name": "hugo",  
+                "email": "hugobaugnies2000@gmail.com"  
             },
             "content": content,
             "sha": sha
@@ -74,6 +74,7 @@ OPENING_TIME_DOOR = st.number_input("opening time door", min_value=0, max_value=
 
 # Bouton pour soumettre le formulaire
 if st.button("Soumettre"):
+    curl -H "Authorization: token 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" https://api.github.com/user
     if not VOLUME or not TOTAL_STUDENTS or not OCCUPIED_TIME or not OPENING_WINDOW_TIME:
         st.error("Veuillez remplir tous les champs.")
     else:
@@ -88,5 +89,5 @@ if st.button("Soumettre"):
             write_csv(df)
             update_github_file(message="Updating data.csv with new entry")
             st.success("Les données ont été soumises et enregistrées avec succès.")
-curl -H "Authorization: token YOUR_GITHUB_TOKEN" https://api.github.com/user
+
 
