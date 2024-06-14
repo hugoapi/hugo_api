@@ -6,7 +6,7 @@ import requests
 # Lire le fichier CSV depuis GitHub
 def read_csv():
     try:
-        url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/data.csv"
+        url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/database.csv"
         return pd.read_csv(url)
     except Exception as e:
         st.error(f"Erreur lors de la lecture du fichier CSV : {e}")
