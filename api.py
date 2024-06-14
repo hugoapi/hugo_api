@@ -6,8 +6,12 @@ import os
 
 # Récupérer le token d'accès personnel depuis les variables d'environnement
 github_token = os.getenv('GITHUB_TOKEN')
-if not github_token:
+if github_token:
+    st.write("Token récupéré avec succès.")  # Message de débogage
+else:
     st.error("Le token GitHub n'a pas été trouvé. Veuillez définir la variable d'environnement GITHUB_TOKEN.")
+    raise ValueError("GitHub token is missing.")
+
 
 # Lire le fichier CSV depuis GitHub
 def read_csv():
