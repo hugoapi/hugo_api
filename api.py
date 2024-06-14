@@ -44,7 +44,7 @@ def update_github_file(filepath="database.csv", message="Update data.csv"):
             st.error("SHA du fichier introuvable. Mise à jour annulée.")
             return
 
-        url = "https://api.github.com/repos/hugoapi/hugo_api/contents/data.csv"
+        url = "https://https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
         payload = {
             "message": message,
             "committer": {
