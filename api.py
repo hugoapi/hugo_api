@@ -13,7 +13,7 @@ def read_csv():
         return pd.DataFrame()  # Retourne un DataFrame vide en cas d'erreur
 
 # Écrire localement dans le fichier CSV
-def write_csv(dataframe, filepath="https://github.com/hugoapi/hugo_api/blob/c3952454c31369e15dbc438c9a307b4717514e4f/data.csv"):
+def write_csv(dataframe, filepath="database.csv"):
     try:
         dataframe.to_csv(filepath, index=False)
     except Exception as e:
@@ -22,7 +22,7 @@ def write_csv(dataframe, filepath="https://github.com/hugoapi/hugo_api/blob/c395
 # Obtenir le SHA du fichier actuel sur GitHub
 def get_file_sha():
     try:
-        url = "https://api.github.com/repos/hugoapi/hugo_api/contents/data.csv"
+        url = "https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
         headers = {
             'Authorization': 'token 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'  
         }
@@ -34,7 +34,7 @@ def get_file_sha():
         return None
 
 # Mettre à jour le fichier sur GitHub
-def update_github_file(filepath="data.csv", message="Update data.csv"):
+def update_github_file(filepath="database.csv", message="Update data.csv"):
     try:
         with open(filepath, "rb") as f:
             content = base64.b64encode(f.read()).decode()
