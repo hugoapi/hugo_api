@@ -32,7 +32,7 @@ def write_csv(dataframe, filepath="database.csv"):
 # Obtenir le SHA du fichier actuel sur GitHub
 def get_file_sha():
     try:
-        url = "https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
+        url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/database.csv"
         headers = {
             'Authorization': f'token {github_token}'  
         }
