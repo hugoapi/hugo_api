@@ -12,11 +12,11 @@ else:
     st.error("Le token GitHub n'a pas été trouvé. Veuillez définir la variable d'environnement GITHUB_TOKEN.")
     raise ValueError("GitHub token is missing.")
 
-
 # Lire le fichier CSV depuis GitHub
 def read_csv():
     try:
         url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/database.csv"
+        st.write(f"Lecture du fichier CSV depuis l'URL : {url}")  # Message de débogage
         return pd.read_csv(url)
     except Exception as e:
         st.error(f"Erreur lors de la lecture du fichier CSV : {e}")
@@ -26,19 +26,23 @@ def read_csv():
 def write_csv(dataframe, filepath="database.csv"):
     try:
         dataframe.to_csv(filepath, index=False)
+        st.write(f"Fichier CSV écrit localement à : {filepath}")  # Message de débogage
     except Exception as e:
         st.error(f"Erreur lors de l'écriture du fichier CSV : {e}")
 
 # Obtenir le SHA du fichier actuel sur GitHub
 def get_file_sha():
     try:
-        url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/database.csv"
+        url = "https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
         headers = {
             'Authorization': f'token {github_token}'  
         }
+        st.write(f"Envoi de la requête GET pour obtenir le SHA du fichier depuis l'URL : {url}")  # Message de débogage
         response = requests.get(url, headers=headers)
         response.raise_for_status()
-        return response.json()['sha']
+        sha = response.json()['sha']
+        st.write(f"SHA récupéré : {sha}")  # Message de débogage
+        return sha
     except Exception as e:
         st.error(f"Erreur lors de la récupération du SHA du fichier : {e}")
         st.error(f"Response content: {response.content}")
@@ -49,13 +53,14 @@ def update_github_file(filepath="database.csv", message="Update data.csv"):
     try:
         with open(filepath, "rb") as f:
             content = base64.b64encode(f.read()).decode()
+            st.write("Fichier encodé en base64.")  # Message de débogage
 
         sha = get_file_sha()
         if sha is None:
             st.error("SHA du fichier introuvable. Mise à jour annulée.")
             return
 
-        url = "https://raw.githubusercontent.com/hugoapi/hugo_api/main/database.csv"
+        url = "https://api.github.com/repos/hugoapi/hugo_api/contents/database.csv"
         payload = {
             "message": message,
             "committer": {
@@ -68,6 +73,7 @@ def update_github_file(filepath="database.csv", message="Update data.csv"):
         headers = {
             'Authorization': f'token {github_token}' 
         }
+        st.write(f"Envoi de la requête PUT pour mettre à jour le fichier à l'URL : {url}")  # Message de débogage
         response = requests.put(url, json=payload, headers=headers)
         response.raise_for_status()
         st.success("Le fichier sur GitHub a été mis à jour avec succès.")
@@ -99,5 +105,6 @@ if st.button("Soumettre"):
             write_csv(df)
             update_github_file(message="Updating data.csv with new entry")
             st.success("Les données ont été soumises et enregistrées avec succès.")
+
 
 
